@@ -11,13 +11,12 @@ internal class Program
     private static DirectoriesConfiguration? _directoriesConfiguration;
     private static NotionConfiguration? _notifonConfiguration;
 
-    private static StringBuilder _markdownBuilder = new StringBuilder();
+    private static readonly StringBuilder MarkdownBuilder = new ();
 
     static async Task Main()
     {
         IConfiguration config = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json")
-            .AddJsonFile("appsettings.development.json", optional: true, reloadOnChange: true)
             .AddEnvironmentVariables()
             .Build();
         
@@ -33,9 +32,8 @@ internal class Program
         Console.Write("Please Enter Reading Log Number: ");
 
         var logNumberString = Console.ReadLine();
-        int logNumber;
 
-        if (!int.TryParse(logNumberString, out logNumber))
+        if (!int.TryParse(logNumberString, out int logNumber) || logNumber == 0)
         {
             Console.WriteLine("Invalid Output");
             return;
@@ -48,138 +46,137 @@ internal class Program
         var markdown = GetMarkdownString(articles, logNumber);
 
         var path = Path.Join(_directoriesConfiguration.Output, $"{logNumber}.md");
+
+        await using var tw = new StreamWriter(path, true);
         
-        using (var tw = new StreamWriter(path, true))
-        {
-            tw.Write(markdown);
-        }
+        await tw.WriteAsync(markdown);
     }
 
     private static string GetMarkdownString(List<Article> articles, int logNumber)
     {
-        _markdownBuilder.AppendLine($"# Reading Log - {DateTime.Now.ToString("MMMM d, yyyy")} (#{logNumber})");
-        _markdownBuilder.AppendLine("");
-        _markdownBuilder.AppendLine("Introduction Text");
-        _markdownBuilder.AppendLine("");
+        MarkdownBuilder.AppendLine($"# Reading Log - {DateTime.Now.ToString("MMMM d, yyyy")} (#{logNumber})");
+        MarkdownBuilder.AppendLine("");
+        MarkdownBuilder.AppendLine("Introduction Text");
+        MarkdownBuilder.AppendLine("");
 
         if (articles.Any(a => a.Category == ReadingLogCategory.InDepth))
         {
-            _markdownBuilder.AppendLine("## In Depth");
-            _markdownBuilder.AppendLine("");
+            MarkdownBuilder.AppendLine("## In Depth");
+            MarkdownBuilder.AppendLine("");
 
             AddLinks(articles.Where(a => a.Category == ReadingLogCategory.InDepth));
         }
 
-        _markdownBuilder.AppendLine("## Link Blast");
-        _markdownBuilder.AppendLine("");
+        MarkdownBuilder.AppendLine("## Link Blast");
+        MarkdownBuilder.AppendLine("");
         
         if (articles.Any(a => a.Category == ReadingLogCategory.DevelopmentDesign))
         {
-            _markdownBuilder.AppendLine("### 👨🏼‍💻 Software Development & Design");
-            _markdownBuilder.AppendLine("");
+            MarkdownBuilder.AppendLine("### 👨🏼‍💻 Software Development & Design");
+            MarkdownBuilder.AppendLine("");
             
             AddLinks(articles.Where(a => a.Category == ReadingLogCategory.DevelopmentDesign));
             
-            _markdownBuilder.AppendLine("---");
-            _markdownBuilder.AppendLine("");
+            MarkdownBuilder.AppendLine("---");
+            MarkdownBuilder.AppendLine("");
         }
         
         if (articles.Any(a => a.Category == ReadingLogCategory.Technology))
         {
-            _markdownBuilder.AppendLine("### 🖥 Technology & the Internet");
-            _markdownBuilder.AppendLine("");
+            MarkdownBuilder.AppendLine("### 🖥 Technology & the Internet");
+            MarkdownBuilder.AppendLine("");
             
             AddLinks(articles.Where(a => a.Category == ReadingLogCategory.Technology));
             
-            _markdownBuilder.AppendLine("---");
-            _markdownBuilder.AppendLine("");
+            MarkdownBuilder.AppendLine("---");
+            MarkdownBuilder.AppendLine("");
         }
         
         if (articles.Any(a => a.Category == ReadingLogCategory.Science))
         {
-            _markdownBuilder.AppendLine("### 🔬 Science");
-            _markdownBuilder.AppendLine("");
+            MarkdownBuilder.AppendLine("### 🔬 Science");
+            MarkdownBuilder.AppendLine("");
             
             AddLinks(articles.Where(a => a.Category == ReadingLogCategory.Science));
             
-            _markdownBuilder.AppendLine("---");
-            _markdownBuilder.AppendLine("");
+            MarkdownBuilder.AppendLine("---");
+            MarkdownBuilder.AppendLine("");
         }
         
         if (articles.Any(a => a.Category == ReadingLogCategory.Gaming))
         {
-            _markdownBuilder.AppendLine("### 🎮 Gaming");
-            _markdownBuilder.AppendLine("");
+            MarkdownBuilder.AppendLine("### 🎮 Gaming");
+            MarkdownBuilder.AppendLine("");
             
             AddLinks(articles.Where(a => a.Category == ReadingLogCategory.Gaming));
             
-            _markdownBuilder.AppendLine("---");
-            _markdownBuilder.AppendLine("");
+            MarkdownBuilder.AppendLine("---");
+            MarkdownBuilder.AppendLine("");
         }
         
         if (articles.Any(a => a.Category == ReadingLogCategory.Business))
         {
-            _markdownBuilder.AppendLine("### 📈 Business & Finance");
-            _markdownBuilder.AppendLine("");
+            MarkdownBuilder.AppendLine("### 📈 Business & Finance");
+            MarkdownBuilder.AppendLine("");
             
             AddLinks(articles.Where(a => a.Category == ReadingLogCategory.Business));
             
-            _markdownBuilder.AppendLine("---");
-            _markdownBuilder.AppendLine("");
+            MarkdownBuilder.AppendLine("---");
+            MarkdownBuilder.AppendLine("");
         }
         
         if (articles.Any(a => a.Category == ReadingLogCategory.Sports))
         {
-            _markdownBuilder.AppendLine("### ⚾ Sports");
-            _markdownBuilder.AppendLine("");
+            MarkdownBuilder.AppendLine("### ⚾ Sports");
+            MarkdownBuilder.AppendLine("");
             
             AddLinks(articles.Where(a => a.Category == ReadingLogCategory.Sports));
             
-            _markdownBuilder.AppendLine("---");
-            _markdownBuilder.AppendLine("");
+            MarkdownBuilder.AppendLine("---");
+            MarkdownBuilder.AppendLine("");
         }
         
         if (articles.Any(a => a.Category == ReadingLogCategory.Podcasts))
         {
-            _markdownBuilder.AppendLine("### 🎧 Podcasts");
-            _markdownBuilder.AppendLine("");
+            MarkdownBuilder.AppendLine("### 🎧 Podcasts");
+            MarkdownBuilder.AppendLine("");
             
             foreach (var article in articles.Where(a => a.Category == ReadingLogCategory.Podcasts))
             {
-                _markdownBuilder.AppendLine($"[{article.Author}: {article.Title}]({article.Url})");
-                _markdownBuilder.AppendLine("");
+                MarkdownBuilder.AppendLine($"[{article.Author}: {article.Title}]({article.Url})");
+                MarkdownBuilder.AppendLine("");
             }
             
-            _markdownBuilder.AppendLine("---");
-            _markdownBuilder.AppendLine("");
+            MarkdownBuilder.AppendLine("---");
+            MarkdownBuilder.AppendLine("");
         }
         
         if (articles.Any(a => a.Category == ReadingLogCategory.Everything))
         {
-            _markdownBuilder.AppendLine("### 🎒 Everything Else");
-            _markdownBuilder.AppendLine("");
+            MarkdownBuilder.AppendLine("### 🎒 Everything Else");
+            MarkdownBuilder.AppendLine("");
             
             AddLinks(articles.Where(a => a.Category == ReadingLogCategory.Everything));
             
-            _markdownBuilder.AppendLine("---");
-            _markdownBuilder.AppendLine("");
+            MarkdownBuilder.AppendLine("---");
+            MarkdownBuilder.AppendLine("");
         }
 
-        _markdownBuilder.AppendLine("🎵 A Song to Leave You With");
-        _markdownBuilder.AppendLine("");
-        _markdownBuilder.AppendLine("#### Artist - Song");
-        _markdownBuilder.AppendLine("");
+        MarkdownBuilder.AppendLine("🎵 A Song to Leave You With");
+        MarkdownBuilder.AppendLine("");
+        MarkdownBuilder.AppendLine("#### Artist - Song");
+        MarkdownBuilder.AppendLine("");
 
 
-        return _markdownBuilder.ToString();
+        return MarkdownBuilder.ToString();
     }
 
     private static void AddLinks(IEnumerable<Article> articles)
     {
         foreach (var article in articles)
         {
-            _markdownBuilder.AppendLine($"[{article.Title}]({article.Url}) - *{article.Author}*");
-            _markdownBuilder.AppendLine("");
+            MarkdownBuilder.AppendLine($"[{article.Title}]({article.Url}) - *{article.Author}*");
+            MarkdownBuilder.AppendLine("");
         }
     }
 }
