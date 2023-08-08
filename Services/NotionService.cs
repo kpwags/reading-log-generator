@@ -41,11 +41,13 @@ public class NotionService
     private async Task<PaginatedList<Page>> FetchFromNotion(int logNumber, string? cursor)
     {
         var readingLogFilter = new NumberFilter("Issue", equal: logNumber);
-        var queryParams = new DatabasesQueryParameters { Filter = readingLogFilter, StartCursor = cursor };
+        var queryParams = new DatabasesQueryParameters
+        {
+            Filter = readingLogFilter,
+            StartCursor = cursor
+        };
         
-        var pages = await _notionClient.Databases.QueryAsync(_notionConfiguration.ReadingLogDbId, queryParams);
-
-        return pages;
+        return await _notionClient.Databases.QueryAsync(_notionConfiguration.ReadingLogDbId, queryParams);
     }
 
     private List<Article> MapNotionResultsToArticles(List<Page> results)
