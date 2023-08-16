@@ -77,8 +77,8 @@ internal class Program
         MarkdownBuilder.AppendLine("## Link Blast");
         MarkdownBuilder.AppendLine("");
         
-        AddSection(ReadingLogCategory.DevelopmentDesign, "👨🏼‍💻Software Development & Design");
-        AddSection(ReadingLogCategory.Technology, "🖥 Technology & the Internet");
+        AddSection(ReadingLogCategory.DevelopmentDesign, "🖥 Software Development & Design");
+        AddSection(ReadingLogCategory.Technology, "📡 Technology & the Internet");
         AddSection(ReadingLogCategory.Science, "🔬 Science");
         AddSection(ReadingLogCategory.Gaming, "🎮 Gaming");
         AddSection(ReadingLogCategory.Business, "📈 Business & Finance");
@@ -99,6 +99,7 @@ internal class Program
             MarkdownBuilder.AppendLine("");
         }
         
+        AddSection(ReadingLogCategory.Entertainment, "📺 Media & Entertainment");
         AddSection(ReadingLogCategory.Everything, "🎒 Everything Else");
         
         MarkdownBuilder.AppendLine("🎵 A Song to Leave You With");
