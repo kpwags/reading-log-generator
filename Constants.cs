@@ -11,4 +11,5 @@ public enum ReadingLogCategory
     Podcasts = 7,
     Everything = 8,
     InDepth = 9,
+    Entertainment = 10,
 }

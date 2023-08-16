@@ -88,6 +88,7 @@ public class NotionService
         "sports" => ReadingLogCategory.Sports,
         "podcasts" => ReadingLogCategory.Podcasts,
         "in depth" => ReadingLogCategory.InDepth,
+        "media & entertainment" => ReadingLogCategory.Entertainment,
         _ => ReadingLogCategory.Everything,
     };
 }
