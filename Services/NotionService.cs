@@ -81,8 +81,11 @@ public class NotionService
     private ReadingLogCategory GetCategoryFromNotionCategory(string category) => category switch
     {
         "software development & design" => ReadingLogCategory.DevelopmentDesign,
-        "technology & the internet" => ReadingLogCategory.Technology,
+        "technology" => ReadingLogCategory.Technology,
+        "the internet" => ReadingLogCategory.Internet,
         "science" => ReadingLogCategory.Science,
+        "space" => ReadingLogCategory.Space,
+        "climate change" => ReadingLogCategory.ClimateChange,
         "gaming" => ReadingLogCategory.Gaming,
         "business & finance" => ReadingLogCategory.Business,
         "sports" => ReadingLogCategory.Sports,

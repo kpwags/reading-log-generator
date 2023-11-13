@@ -78,8 +78,11 @@ internal class Program
         MarkdownBuilder.AppendLine("");
         
         AddSection(ReadingLogCategory.DevelopmentDesign, "🖥 Software Development & Design");
-        AddSection(ReadingLogCategory.Technology, "📡 Technology & the Internet");
+        AddSection(ReadingLogCategory.Technology, "🛜 The Internet");
+        AddSection(ReadingLogCategory.Technology, "📡 Technology");
         AddSection(ReadingLogCategory.Science, "🔬 Science");
+        AddSection(ReadingLogCategory.Space, "🚀 Space");
+        AddSection(ReadingLogCategory.ClimateChange, "🌎 Climate Change");
         AddSection(ReadingLogCategory.Gaming, "🎮 Gaming");
         AddSection(ReadingLogCategory.Business, "📈 Business & Finance");
         AddSection(ReadingLogCategory.Sports, "⚾️ Sports");
