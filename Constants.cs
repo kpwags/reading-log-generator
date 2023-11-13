@@ -12,4 +12,7 @@ public enum ReadingLogCategory
     Everything = 8,
     InDepth = 9,
     Entertainment = 10,
+    Space = 11,
+    ClimateChange = 12,
+    Internet = 13,
 }
