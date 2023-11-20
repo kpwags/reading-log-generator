@@ -78,7 +78,7 @@ internal class Program
         MarkdownBuilder.AppendLine("");
         
         AddSection(ReadingLogCategory.DevelopmentDesign, "🖥 Software Development & Design");
-        AddSection(ReadingLogCategory.Technology, "🛜 The Internet");
+        AddSection(ReadingLogCategory.Internet, "🛜 The Internet");
         AddSection(ReadingLogCategory.Technology, "📡 Technology");
         AddSection(ReadingLogCategory.Science, "🔬 Science");
         AddSection(ReadingLogCategory.Space, "🚀 Space");
@@ -105,7 +105,7 @@ internal class Program
         AddSection(ReadingLogCategory.Entertainment, "📺 Media & Entertainment");
         AddSection(ReadingLogCategory.Everything, "🎒 Everything Else");
         
-        MarkdownBuilder.AppendLine("🎵 A Song to Leave You With");
+        MarkdownBuilder.AppendLine("### 🎵 A Song to Leave You With");
         MarkdownBuilder.AppendLine("");
         MarkdownBuilder.AppendLine("#### Artist - Song");
         MarkdownBuilder.AppendLine("");
