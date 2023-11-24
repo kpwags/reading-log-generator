@@ -77,7 +77,10 @@ internal class Program
         MarkdownBuilder.AppendLine("## Link Blast");
         MarkdownBuilder.AppendLine("");
         
-        AddSection(ReadingLogCategory.DevelopmentDesign, "🖥 Software Development & Design");
+        AddSection(ReadingLogCategory.DotNet, "🖥 .NET");
+        AddSection(ReadingLogCategory.WebDevelopment, "⌨️ Web Development");
+        AddSection(ReadingLogCategory.Development, "💻 General Development");
+        AddSection(ReadingLogCategory.Design, "🎨 Design");
         AddSection(ReadingLogCategory.Internet, "🛜 The Internet");
         AddSection(ReadingLogCategory.Technology, "📡 Technology");
         AddSection(ReadingLogCategory.Science, "🔬 Science");
@@ -107,9 +110,21 @@ internal class Program
         
         MarkdownBuilder.AppendLine("### 🎵 A Song to Leave You With");
         MarkdownBuilder.AppendLine("");
-        MarkdownBuilder.AppendLine("#### Artist - Song");
-        MarkdownBuilder.AppendLine("");
-
+        
+        if (_articles.Any(a => a.Category == ReadingLogCategory.Song))
+        {
+            var song = _articles.First(a => a.Category == ReadingLogCategory.Song);
+            
+            MarkdownBuilder.AppendLine($"#### {song.Author} - {song.Title}");
+            MarkdownBuilder.AppendLine("");
+            MarkdownBuilder.AppendLine($"<YouTubeEmbed id=\"{song.Url.Replace("https://www.youtube.com/watch?v=", "")}\" title=\"{song.Author} - {song.Title}\" />");
+            MarkdownBuilder.AppendLine("");
+        }
+        else
+        {
+            MarkdownBuilder.AppendLine("#### Artist - Song");
+            MarkdownBuilder.AppendLine("");
+        }
 
         return MarkdownBuilder.ToString();
     }

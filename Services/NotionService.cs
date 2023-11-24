@@ -80,7 +80,10 @@ public class NotionService
 
     private ReadingLogCategory GetCategoryFromNotionCategory(string category) => category switch
     {
-        "software development & design" => ReadingLogCategory.DevelopmentDesign,
+        ".net" => ReadingLogCategory.DotNet,
+        "web development" => ReadingLogCategory.WebDevelopment,
+        "general development" => ReadingLogCategory.Development,
+        "design" => ReadingLogCategory.Design,
         "technology" => ReadingLogCategory.Technology,
         "the internet" => ReadingLogCategory.Internet,
         "science" => ReadingLogCategory.Science,
@@ -92,6 +95,7 @@ public class NotionService
         "podcasts" => ReadingLogCategory.Podcasts,
         "in depth" => ReadingLogCategory.InDepth,
         "media & entertainment" => ReadingLogCategory.Entertainment,
+        "song" => ReadingLogCategory.Song,
         _ => ReadingLogCategory.Everything,
     };
 }
