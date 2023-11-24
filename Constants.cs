@@ -2,7 +2,7 @@ namespace ReadingLogGenerator;
 
 public enum ReadingLogCategory
 {
-    DevelopmentDesign = 1,
+    DotNet = 1,
     Technology = 2,
     Science = 3,
     Gaming = 4,
@@ -15,4 +15,8 @@ public enum ReadingLogCategory
     Space = 11,
     ClimateChange = 12,
     Internet = 13,
+    Design = 14,
+    WebDevelopment = 15,
+    Development = 16,
+    Song = 17,
 }
