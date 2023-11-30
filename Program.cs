@@ -78,17 +78,18 @@ internal class Program
         MarkdownBuilder.AppendLine("");
         
         AddSection(ReadingLogCategory.DotNet, "🖥 .NET");
-        AddSection(ReadingLogCategory.WebDevelopment, "⌨️ Web Development");
+        AddSection(ReadingLogCategory.WebDevelopment, "🌐 Web Development");
         AddSection(ReadingLogCategory.Development, "💻 General Development");
         AddSection(ReadingLogCategory.Design, "🎨 Design");
-        AddSection(ReadingLogCategory.Internet, "🛜 The Internet");
-        AddSection(ReadingLogCategory.Technology, "📡 Technology");
+        AddSection(ReadingLogCategory.Internet, "📡 The Internet");
+        AddSection(ReadingLogCategory.Technology, "🔌 Technology");
         AddSection(ReadingLogCategory.Science, "🔬 Science");
         AddSection(ReadingLogCategory.Space, "🚀 Space");
         AddSection(ReadingLogCategory.ClimateChange, "🌎 Climate Change");
         AddSection(ReadingLogCategory.Gaming, "🎮 Gaming");
         AddSection(ReadingLogCategory.Business, "📈 Business & Finance");
         AddSection(ReadingLogCategory.Sports, "⚾️ Sports");
+        AddSection(ReadingLogCategory.Fitness, "🏃 Fitness");
 
         if (_articles.Any(a => a.Category == ReadingLogCategory.Podcasts))
         {
@@ -106,6 +107,7 @@ internal class Program
         }
         
         AddSection(ReadingLogCategory.Entertainment, "📺 Media & Entertainment");
+        AddSection(ReadingLogCategory.Politics, "🏛️ Politics");
         AddSection(ReadingLogCategory.Everything, "🎒 Everything Else");
         
         MarkdownBuilder.AppendLine("### 🎵 A Song to Leave You With");

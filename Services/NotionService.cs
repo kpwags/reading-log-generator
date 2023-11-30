@@ -96,6 +96,8 @@ public class NotionService
         "in depth" => ReadingLogCategory.InDepth,
         "media & entertainment" => ReadingLogCategory.Entertainment,
         "song" => ReadingLogCategory.Song,
+        "politics" => ReadingLogCategory.Politics,
+        "fitness" => ReadingLogCategory.Fitness,
         _ => ReadingLogCategory.Everything,
     };
 }
