@@ -19,4 +19,6 @@ public enum ReadingLogCategory
     WebDevelopment = 15,
     Development = 16,
     Song = 17,
+    Politics = 18,
+    Fitness = 19,
 }
