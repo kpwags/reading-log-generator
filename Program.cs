@@ -46,7 +46,7 @@ internal class Program
 
         var markdown = GetMarkdownString(logNumber);
 
-        var path = Path.Join(_directoriesConfiguration.Output, $"{logNumber}.mdx");
+        var path = Path.Join(_directoriesConfiguration.Output, $"{logNumber}.md");
 
         await using var sw = new StreamWriter(path, true);
         
@@ -58,12 +58,13 @@ internal class Program
         MarkdownBuilder.AppendLine("---");
         MarkdownBuilder.AppendLine($"title: 'Reading Log - {DateTime.Now.ToString("MMMM d, yyyy")} (#{logNumber})'");
         MarkdownBuilder.AppendLine($"date: '{DateTime.Now.ToString("yyyy-MM-dd")}'");
-        MarkdownBuilder.AppendLine("tags: ['Reading Log']");
-        MarkdownBuilder.AppendLine("commentIssueNumber: GITHUB_COMMENTS_ISSUE_NUM");
+        MarkdownBuilder.AppendLine("tags:");
+        MarkdownBuilder.AppendLine("  - Reading Log");
         MarkdownBuilder.AppendLine("---");
         
         MarkdownBuilder.AppendLine("");
         MarkdownBuilder.AppendLine("Introduction Text");
+        MarkdownBuilder.AppendLine("<!-- excerpt -->");
         MarkdownBuilder.AppendLine("");
 
         if (_articles.Any(a => a.Category == ReadingLogCategory.InDepth))
@@ -71,9 +72,10 @@ internal class Program
             MarkdownBuilder.AppendLine("## In Depth");
             MarkdownBuilder.AppendLine("");
 
-            AddLinks(_articles.Where(a => a.Category == ReadingLogCategory.InDepth));
+            AddInDepthLinks(_articles.Where(a => a.Category == ReadingLogCategory.InDepth));
         }
 
+        MarkdownBuilder.AppendLine("");
         MarkdownBuilder.AppendLine("## Link Blast");
         MarkdownBuilder.AppendLine("");
         
@@ -119,7 +121,7 @@ internal class Program
             
             MarkdownBuilder.AppendLine($"#### {song.Author} - {song.Title}");
             MarkdownBuilder.AppendLine("");
-            MarkdownBuilder.AppendLine($"<YouTubeEmbed id=\"{song.Url.Replace("https://www.youtube.com/watch?v=", "")}\" title=\"{song.Author} - {song.Title}\" />");
+            MarkdownBuilder.AppendLine($"{{% youTubeEmbed \"{song.Url.Replace("https://www.youtube.com/watch?v=", "")}\" \"{song.Author} - {song.Title}\" %}}");
             MarkdownBuilder.AppendLine("");
         }
         else
@@ -142,6 +144,16 @@ internal class Program
             
             MarkdownBuilder.AppendLine("---");
             MarkdownBuilder.AppendLine("");
+        }
+    }
+
+    private static void AddInDepthLinks(IEnumerable<Article> articles)
+    {
+        foreach (var article in articles)
+        {
+            MarkdownBuilder.AppendLine($"{{% inDepth \"{article.Author}\" \"{article.Title}\" \"{article.Url}\" %}}");
+            MarkdownBuilder.AppendLine("");
+            MarkdownBuilder.AppendLine("{% endinDepth %}");
         }
     }
 
