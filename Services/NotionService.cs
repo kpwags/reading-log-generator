@@ -93,11 +93,10 @@ public class NotionService
         "business & finance" => ReadingLogCategory.Business,
         "sports" => ReadingLogCategory.Sports,
         "podcasts" => ReadingLogCategory.Podcasts,
-        "in depth" => ReadingLogCategory.InDepth,
         "media & entertainment" => ReadingLogCategory.Entertainment,
         "song" => ReadingLogCategory.Song,
         "politics" => ReadingLogCategory.Politics,
-        "fitness" => ReadingLogCategory.Fitness,
+        "health & fitness" => ReadingLogCategory.Fitness,
         _ => ReadingLogCategory.Everything,
     };
 }

@@ -10,7 +10,6 @@ public enum ReadingLogCategory
     Sports = 6,
     Podcasts = 7,
     Everything = 8,
-    InDepth = 9,
     Entertainment = 10,
     Space = 11,
     ClimateChange = 12,

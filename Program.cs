@@ -66,18 +66,6 @@ internal class Program
         MarkdownBuilder.AppendLine("Introduction Text");
         MarkdownBuilder.AppendLine("<!-- excerpt -->");
         MarkdownBuilder.AppendLine("");
-
-        if (_articles.Any(a => a.Category == ReadingLogCategory.InDepth))
-        {
-            MarkdownBuilder.AppendLine("## In Depth");
-            MarkdownBuilder.AppendLine("");
-
-            AddInDepthLinks(_articles.Where(a => a.Category == ReadingLogCategory.InDepth));
-        }
-
-        MarkdownBuilder.AppendLine("");
-        MarkdownBuilder.AppendLine("## Link Blast");
-        MarkdownBuilder.AppendLine("");
         
         AddSection(ReadingLogCategory.DotNet, "🖥 .NET");
         AddSection(ReadingLogCategory.WebDevelopment, "🌐 Web Development");
@@ -91,11 +79,11 @@ internal class Program
         AddSection(ReadingLogCategory.Gaming, "🎮 Gaming");
         AddSection(ReadingLogCategory.Business, "📈 Business & Finance");
         AddSection(ReadingLogCategory.Sports, "⚾️ Sports");
-        AddSection(ReadingLogCategory.Fitness, "🏃 Fitness");
+        AddSection(ReadingLogCategory.Fitness, "🏃 Health & Fitness");
 
         if (_articles.Any(a => a.Category == ReadingLogCategory.Podcasts))
         {
-            MarkdownBuilder.AppendLine("### 🎧 Podcasts");
+            MarkdownBuilder.AppendLine("## 🎧 Podcasts");
             MarkdownBuilder.AppendLine("");
             
             foreach (var article in _articles.Where(a => a.Category == ReadingLogCategory.Podcasts))
@@ -112,21 +100,23 @@ internal class Program
         AddSection(ReadingLogCategory.Politics, "🏛️ Politics");
         AddSection(ReadingLogCategory.Everything, "🎒 Everything Else");
         
-        MarkdownBuilder.AppendLine("### 🎵 A Song to Leave You With");
+        MarkdownBuilder.AppendLine("## 🎵 A Song to Leave You With");
         MarkdownBuilder.AppendLine("");
         
         if (_articles.Any(a => a.Category == ReadingLogCategory.Song))
         {
             var song = _articles.First(a => a.Category == ReadingLogCategory.Song);
             
-            MarkdownBuilder.AppendLine($"#### {song.Author} - {song.Title}");
+            MarkdownBuilder.AppendLine($"<h3 class=\"music\">{song.Author} - {song.Title}</h3>");
             MarkdownBuilder.AppendLine("");
             MarkdownBuilder.AppendLine($"{{% youTubeEmbed \"{song.Url.Replace("https://www.youtube.com/watch?v=", "")}\" \"{song.Author} - {song.Title}\" %}}");
             MarkdownBuilder.AppendLine("");
         }
         else
         {
-            MarkdownBuilder.AppendLine("#### Artist - Song");
+            MarkdownBuilder.AppendLine("<h3 class=\"music\">Artist - Song</h3>");
+            MarkdownBuilder.AppendLine("");
+            MarkdownBuilder.AppendLine($"{{% youTubeEmbed \"\" \"\" %}}");
             MarkdownBuilder.AppendLine("");
         }
 
@@ -137,23 +127,13 @@ internal class Program
     {
         if (_articles.Any(a => a.Category == category))
         {
-            MarkdownBuilder.AppendLine($"### {title}");
+            MarkdownBuilder.AppendLine($"## {title}");
             MarkdownBuilder.AppendLine("");
             
             AddLinks(_articles.Where(a => a.Category == category));
             
             MarkdownBuilder.AppendLine("---");
             MarkdownBuilder.AppendLine("");
-        }
-    }
-
-    private static void AddInDepthLinks(IEnumerable<Article> articles)
-    {
-        foreach (var article in articles)
-        {
-            MarkdownBuilder.AppendLine($"{{% inDepth \"{article.Author}\" \"{article.Title}\" \"{article.Url}\" %}}");
-            MarkdownBuilder.AppendLine("");
-            MarkdownBuilder.AppendLine("{% endinDepth %}");
         }
     }
 
