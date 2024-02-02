@@ -20,4 +20,6 @@ public enum ReadingLogCategory
     Song = 17,
     Politics = 18,
     Fitness = 19,
+    Journalism = 20,
+    Longform = 21,
 }

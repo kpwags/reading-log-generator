@@ -97,6 +97,8 @@ internal class Program
         }
         
         AddSection(ReadingLogCategory.Entertainment, "📺 Media & Entertainment");
+        AddSection(ReadingLogCategory.Longform, "📝 Longform");
+        AddSection(ReadingLogCategory.Journalism, "📰 Journalism");
         AddSection(ReadingLogCategory.Politics, "🏛️ Politics");
         AddSection(ReadingLogCategory.Everything, "🎒 Everything Else");
         
