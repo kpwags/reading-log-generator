@@ -105,22 +105,10 @@ internal class Program
         MarkdownBuilder.AppendLine("## 🎵 A Song to Leave You With");
         MarkdownBuilder.AppendLine("");
         
-        if (_articles.Any(a => a.Category == ReadingLogCategory.Song))
-        {
-            var song = _articles.First(a => a.Category == ReadingLogCategory.Song);
-            
-            MarkdownBuilder.AppendLine($"<h3 class=\"music\">{song.Author} - {song.Title}</h3>");
-            MarkdownBuilder.AppendLine("");
-            MarkdownBuilder.AppendLine($"{{% youTubeEmbed \"{song.Url.Replace("https://www.youtube.com/watch?v=", "")}\" \"{song.Author} - {song.Title}\" %}}");
-            MarkdownBuilder.AppendLine("");
-        }
-        else
-        {
-            MarkdownBuilder.AppendLine("<h3 class=\"music\">Artist - Song</h3>");
-            MarkdownBuilder.AppendLine("");
-            MarkdownBuilder.AppendLine($"{{% youTubeEmbed \"\" \"\" %}}");
-            MarkdownBuilder.AppendLine("");
-        }
+        MarkdownBuilder.AppendLine("<h3 class=\"music\">Artist - Song</h3>");
+        MarkdownBuilder.AppendLine("");
+        MarkdownBuilder.AppendLine($"{{% youTubeEmbed \"\" \"\" %}}");
+        MarkdownBuilder.AppendLine("");
 
         return MarkdownBuilder.ToString();
     }
