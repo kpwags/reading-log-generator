@@ -55,9 +55,12 @@ internal class Program
 
     private static string GetMarkdownString(int logNumber)
     {
+        var utcDateTime = string.Format("{0:yyyy-MM-ddTHH:mm:ss.FFFZ}", DateTime.UtcNow);
+        
         MarkdownBuilder.AppendLine("---");
         MarkdownBuilder.AppendLine($"title: 'Reading Log - {DateTime.Now.ToString("MMMM d, yyyy")} (#{logNumber})'");
-        MarkdownBuilder.AppendLine($"date: '{DateTime.Now.ToString("yyyy-MM-dd")}'");
+        MarkdownBuilder.AppendLine($"date: '{utcDateTime}'");
+        MarkdownBuilder.AppendLine($"permalink: /reading-log/{logNumber}/index.html");
         MarkdownBuilder.AppendLine("tags:");
         MarkdownBuilder.AppendLine("  - Reading Log");
         MarkdownBuilder.AppendLine("---");
